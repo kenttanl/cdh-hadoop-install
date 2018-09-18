@@ -1,0 +1,22 @@
+#!/usr/bin/expect
+set manageraddress [lindex $argv 0]
+set hostname [lindex $argv 1]
+set username [lindex $argv 2]
+set password [lindex $argv 3]
+spawn ssh $username@$manageraddress
+expect {
+"yes/no" { send "yes\r";exp_continue}
+"password:" { send "$password\r"}
+}
+expect "]*"
+send "/usr/bin/ssh-copy-id -i ~/.ssh/id_rsa.pub $username@$hostname\r"
+expect {
+"yes/no" { send "yes\r";exp_continue}
+"password:" { send "$password\r"}
+}
+#send "$password\r"
+#exit
+send "exit\r"
+expect eof
+exit
+

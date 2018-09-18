@@ -1,0 +1,18 @@
+#!/usr/bin/expect
+set ipaddress [lindex $argv 0]
+set username [lindex $argv 1]
+set passwd [lindex $argv 2]
+set timeout 30
+spawn ssh $username@$ipaddress
+expect {
+
+"yes/no" { send "yes\r";exp_continue }
+
+"password:" { send "$passwd\r" }
+
+}
+expect "]#"
+send "if test -e ~/.ssh/*.pub;then\r exit\r else\r ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa\r fi\r"
+send "exit\r"
+expect eof
+exit

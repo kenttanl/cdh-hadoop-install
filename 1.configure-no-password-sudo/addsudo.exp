@@ -1,0 +1,28 @@
+#!/usr/bin/expect
+set hostname [lindex $argv 0]
+set username [lindex $argv 1]
+set password [lindex $argv 2]
+#set timeout 60
+spawn ssh $username@$hostname
+expect {
+  "yes/no" { send "yes\r";exp_continue}
+  "password:" { send "$password\r"}
+  "~]$" {send "\r"}
+}
+
+expect "]*"
+send "sudo su - \r"
+
+expect "password" 
+send "$password\r"
+
+expect "]#"
+send "/bin/sed -i 's/Defaults requiretty/#Defaults requiretty/g' /etc/sudoers \r"
+
+expect "*"
+send "exit\r"
+expect "*"
+send "exit\r"
+expect eof
+exit
+

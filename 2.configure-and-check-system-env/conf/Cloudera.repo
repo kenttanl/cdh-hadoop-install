@@ -1,0 +1,18 @@
+[cloudera-manager]
+name=Cloudera manager
+baseurl=http://10.1.46.31/cm5/5.8.3/
+gpgkey=http://10.1.46.31/RPM-GPG-KEY-cloudera
+gpgcheck=1
+
+[cloudera-cdh]
+name=Cloudera hadoop
+baseurl=http://10.1.46.31/cdh5/parcels/5.8.3/
+gpgkey=http://10.1.46.31/RPM-GPG-KEY-cloudera
+gpgcheck=1
+enabled=1
+
+[jdk]
+name=jdk
+baseurl=http://10.1.46.31/jdk/
+enabled=1
+gpgcheck=0

@@ -1,0 +1,16 @@
+#!/usr/bin/expect
+set username [lindex $argv 0]
+set passwd [lindex $argv 1]
+set hostname [lindex $argv 2]
+set pubkeyfile [lindex $argv 3]
+spawn sudo -u $username /usr/bin/ssh-copy-id -i $pubkeyfile $username@$hostname
+set timeout 10
+expect {
+"yes/no" { send "yes\r";exp_continue }
+"*password:*" { send "$passwd\r" }
+#"Permission denied, please try again*" { set RET_VALUE 4;exit $RET_VALUE}
+#timeout { exit 10 } 
+#eof { exit 0 }
+}
+#expect "]*"
+expect eof

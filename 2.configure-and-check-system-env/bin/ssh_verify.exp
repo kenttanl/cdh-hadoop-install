@@ -1,0 +1,16 @@
+#!/usr/bin/expect
+#set srcipaddress [lindex $argv 0]
+set desipaddress [lindex $argv 0]
+set username [lindex $argv 1]
+#set password [lindex $argv 2]
+set RET_VALUE 0
+set timeout 3
+spawn ssh $username@$desipaddress
+expect {
+"yes/no" { send "yes\r";exp_continue}
+"*password:" { set RET_VALUE 4;exit $RET_VALUE}
+#"Permission denied, please try again.*" {set RET_VALUE 4;exit $RET_VALUE}
+#timeout {set RET_VALUE 4;exit $RET_VALUE}
+}
+expect eof
+exit $RET_VALUE

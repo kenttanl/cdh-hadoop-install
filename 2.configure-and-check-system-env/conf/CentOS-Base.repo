@@ -1,0 +1,41 @@
+# BDA.repo
+#
+# The mirror system uses the connecting IP address of the client and the
+# update status of each mirror to pick mirrors that are updated to and
+# geographically close to the client.  You should use this for CentOS updates
+# unless you are manually picking other mirrors.
+#
+# If the mirrorlist= does not work for you, as a fall back you can try the
+# remarked out baseurl= line instead.
+#
+
+[base]
+name=Centos packages
+baseurl=http://10.1.46.31/Packages7.2.1511/
+enabled=1
+gpgcheck=1
+gpgkey=http://10.1.46.31/RPM-GPG-KEY-CentOS-7
+
+
+[cloudera-manager]
+name = Cloudera Manager, Version 5.8.3
+baseurl = http://10.1.46.31/cm5/5.8.3/
+gpgkey = http://10.1.46.31/RPM-GPG-KEY-cloudera
+enabled=1
+gpgcheck = 1
+
+
+[cloudera-cdh]
+name=Cloudera hadoop
+baseurl=http://10.1.46.31/cdh5/parcels/5.8.3/
+gpgkey=http://10.1.46.31/RPM-GPG-KEY-cloudera
+gpgcheck=1
+enabled=1
+
+[jdk]
+name=jdk
+baseurl=http://10.1.46.31/jdk/
+enabled=1
+gpgcheck=0
+
+
