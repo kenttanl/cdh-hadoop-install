@@ -1,6 +1,6 @@
 #!/bin/sh
 username=kt94	
-password=negg.123
+password=123456
 
 svrs=`cat host-ips | grep -v '^#'`
 
